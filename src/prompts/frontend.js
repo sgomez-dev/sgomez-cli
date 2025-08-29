@@ -4,7 +4,7 @@ export async function askFrontend() {
     const { hasFrontend } = await inquirer.prompt({
         type: "confirm",
         name: "hasFrontend",
-        message: "¿Vas a hacer un frontend?"
+        message: "Do you want to do a frontend?"
     });
     
     if (!hasFrontend) return null;
