@@ -10,9 +10,9 @@ export async function generateNextJs(options) {
     ];
     
     if (language === "TypeScript") {
-        args.push("--javascript");
-    } else {
         args.push("--typescript");
+    } else {
+        args.push("--javascript");
     }
     
     if (tools && tools.includes("TailwindCSS")) {

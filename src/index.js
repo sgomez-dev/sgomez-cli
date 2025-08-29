@@ -20,16 +20,18 @@ export async function runCLI() {
         const backendOptions = await askBackend();
         const commonOptions = await askCommon();
 
-        switch (frontendOptions.framework) {
-            case "React (Vite)":
-                await generateReact({ ...frontendOptions, ...commonOptions});
-                break;
-            case "Next.js":
-                await generateNextJs({ ...frontendOptions, ...commonOptions});
-                break;
-            case "Angular":
-                await generateAngular({ ...frontendOptions, ...commonOptions});
-                break;
+        if (frontendOptions && frontendOptions.framework) {
+            switch (frontendOptions.framework) {
+                case "React (Vite)":
+                    await generateReact({ ...frontendOptions, ...commonOptions});
+                    break;
+                case "Next.js":
+                    await generateNextJs({ ...frontendOptions, ...commonOptions});
+                    break;
+                case "Angular":
+                    await generateAngular({ ...frontendOptions, ...commonOptions});
+                    break;
+            }
         }
 
         if (backendOptions) {

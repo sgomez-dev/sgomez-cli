@@ -18,7 +18,7 @@ export async function generateNode(options) {
     app.listen(PORT, () => console.log(\`Server running on http://localhost:\${PORT}\`));
     `;
 
-  fs.writeFileSync(`${projectName}/server.js`, serverCode);
+  fs.writeFileSync(`${projectName}/index.js`, serverCode);
 
   console.log(`Node.js + Express project ${projectName} created successfully!`);
 }

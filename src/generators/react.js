@@ -5,7 +5,7 @@ export async function generateReact(options) {
     const { projectName, language, tools } = options;
     
     // Corrección: el template para TypeScript debería ser 'react-ts', no 'react'
-    const templateFlag = language === 'TypeScript' ? 'react' : 'react-ts';
+    const templateFlag = language === 'TypeScript' ? 'react-ts' : 'react';
     
     await runCommand("npm", ["create", "vite@latest", projectName, "--", "--template", templateFlag]);
     
