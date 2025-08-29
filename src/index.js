@@ -25,7 +25,7 @@ export async function runCLI() {
                 await generateReact({ ...frontendOptions, ...commonOptions});
                 break;
             case "Next.js":
-                await generateNestJs({ ...frontendOptions, ...commonOptions});
+                await generateNextJs({ ...frontendOptions, ...commonOptions});
                 break;
             case "Angular":
                 await generateAngular({ ...frontendOptions, ...commonOptions});
@@ -51,6 +51,10 @@ export async function runCLI() {
 
         logger.success(`Project setup complete!\n Remember to do 'npm i' to install all dependencies!\n Happy coding!🚀`);
     } catch (error) {
-        logger.error("An error occurred:", error.message);
+        logger.error("An error occurred:");
+        console.log("Error type:", typeof error);
+        console.log("Error value:", error);
+        console.log("Error stack:", error?.stack);
+        process.exit(1);
     }
 }

@@ -11,7 +11,7 @@ export async function generateAngular(options) {
     const path = `${projectName}/src/styles.css`;
     fs.writeFileSync(path, `@import 'tailwindcss';\n`);
 
-    const angularConfigPath = path.join(projectPath, ".postcssrc.json");
+    const angularConfigPath = path.join(projectName, ".postcssrc.json");
     const angularConfigContent = `
         {
             "plugins": {
@@ -22,5 +22,5 @@ export async function generateAngular(options) {
     fs.writeFileSync(angularConfigPath, angularConfigContent);
   }
 
-  console.log(`Angular project ${projectName} created successfully!\n Run it using:\n ng serve`);
+  console.log(`Angular project ${projectName} created successfully!\n `);
 }

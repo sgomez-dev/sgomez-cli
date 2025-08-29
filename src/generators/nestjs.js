@@ -1,6 +1,6 @@
 import { runCommand } from "../utils/exec.js";
 
-export async function generateNestJS(options) {
+export async function generateNestJs(options) {
   const { projectName } = options;
 
   await runCommand("npm", ["install", "-g", "@nestjs/cli"]);
