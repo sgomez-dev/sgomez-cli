@@ -15,7 +15,7 @@
     "url": "git+https://github.com/sgomez-dev/sgomez-cli.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "sgomez-dev",
   "license": "ISC",
   "type": "module",
   "bugs": {
