@@ -1,31 +1,36 @@
 import { runCommand } from "../utils/exec.js";
-import path from 'path';
+import logger from "../utils/logger.js";
 
 export async function generateNextJs(options) {
-    const { projectName, language, tools } = options;
-    
-    const args = [
-        "create-next-app@latest", 
-        projectName
-    ];
-    
-    if (language === "TypeScript") {
-        args.push("--typescript");
-    } else {
-        args.push("--javascript");
-    }
-    
-    if (tools && tools.includes("TailwindCSS")) {
-        args.push("--tailwind");
-    } else {
-        args.push("--no-tailwind");
-    }
-    
-    await runCommand("npx", args);
-    
-    if (tools && tools.includes("Framer Motion")) {
-        await runCommand("npm", ["install", "framer-motion"], { cwd: projectName });
-    }
-    
-    console.log(`Next.js project ${projectName} created successfully! Run it using:\nnpm run build\nnpm run dev`);
+  const { projectName, language, tools } = options;
+
+  const args = ["create-next-app@latest", projectName, "--use-npm"];
+
+  if (language === "TypeScript") {
+    args.push("--ts");
+  } else {
+    args.push("--js");
+  }
+
+  if (tools?.includes("TailwindCSS")) {
+    args.push("--tailwind");
+  } else {
+    args.push("--no-tailwind");
+  }
+
+  args.push("--eslint", "--app", "--no-src-dir", "--import-alias", "@/*");
+
+  const spinner = logger.spinner("Creating Next.js project...");
+  await runCommand("npx", args);
+  spinner.succeed("Next.js project created");
+
+  if (tools?.includes("Framer Motion")) {
+    const motionSpinner = logger.spinner("Installing Framer Motion...");
+    await runCommand("npm", ["install", "framer-motion"], {
+      cwd: projectName,
+    });
+    motionSpinner.succeed("Framer Motion installed");
+  }
+
+  logger.success(`Next.js project '${projectName}' created successfully.`);
 }

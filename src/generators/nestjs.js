@@ -1,12 +1,19 @@
 import { runCommand } from "../utils/exec.js";
+import logger from "../utils/logger.js";
 
 export async function generateNestJs(options) {
   const { projectName } = options;
 
-  await runCommand("npm", ["install", "-g", "@nestjs/cli"]);
-  await runCommand("nest", ["new", projectName, "--skip-install"]);
+  const spinner = logger.spinner("Creating NestJS project...");
+  await runCommand("npx", [
+    "@nestjs/cli",
+    "new",
+    projectName,
+    "--package-manager",
+    "npm",
+    "--skip-git",
+  ]);
+  spinner.succeed("NestJS project created");
 
-  await runCommand("npm", ["install"], { cwd: projectName });
-
-  console.log(`NestJS project ${projectName} created successfully!`);
+  logger.success(`NestJS project '${projectName}' created successfully.`);
 }

@@ -4,7 +4,7 @@ export async function askBackend() {
   const { hasBackend } = await inquirer.prompt({
     type: "confirm",
     name: "hasBackend",
-    message: "Do you want to do a backend?"
+    message: "Do you want a backend?",
   });
 
   if (!hasBackend) return null;
@@ -13,7 +13,14 @@ export async function askBackend() {
     type: "list",
     name: "backendLang",
     message: "Select a backend framework:",
-    choices: ["Node.js + Express", "NestJS", "Django", "Go"]
+    choices: [
+      "Node.js + Express",
+      "NestJS",
+      "Hono (Bun)",
+      "FastAPI (Python)",
+      "Django",
+      "Go",
+    ],
   });
 
   return { backendLang };
