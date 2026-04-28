@@ -1,26 +1,35 @@
 import { runCommand } from "../utils/exec.js";
+import fs from "fs";
+import path from "path";
+import logger from "../utils/logger.js";
 
 export async function generateAngular(options) {
   const { projectName, tools } = options;
 
-  await runCommand("npx", ["@angular/cli", "new", projectName, "--defaults"]);
+  const spinner = logger.spinner("Creating Angular project...");
+  await runCommand("npx", ["@angular/cli", "new", projectName, "--defaults", "--skip-git"]);
+  spinner.succeed("Angular project created");
 
-  if (tools.includes("Tailwind")) {
-    await runCommand("npm", ["install", "tailwindcss", "@tailwindcss/postcss", "postcss", "--force"], { cwd: projectName });
-    const fs = await import("fs");
-    const path = `${projectName}/src/styles.css`;
-    fs.writeFileSync(path, `@import 'tailwindcss';\n`);
+  if (tools?.includes("TailwindCSS")) {
+    const tailwindSpinner = logger.spinner("Setting up TailwindCSS...");
+    await runCommand(
+      "npm",
+      ["install", "tailwindcss", "@tailwindcss/postcss", "postcss", "--force"],
+      { cwd: projectName }
+    );
 
-    const angularConfigPath = path.join(projectName, ".postcssrc.json");
-    const angularConfigContent = `
-        {
-            "plugins": {
-                "@tailwindcss/postcss": {},
-            }
-        }
-    `;
-    fs.writeFileSync(angularConfigPath, angularConfigContent);
+    const stylesPath = path.join(projectName, "src", "styles.css");
+    fs.writeFileSync(stylesPath, `@import 'tailwindcss';\n`);
+
+    const postcssPath = path.join(projectName, ".postcssrc.json");
+    const postcssContent = JSON.stringify(
+      { plugins: { "@tailwindcss/postcss": {} } },
+      null,
+      2
+    );
+    fs.writeFileSync(postcssPath, postcssContent);
+    tailwindSpinner.succeed("TailwindCSS configured");
   }
 
-  console.log(`Angular project ${projectName} created successfully!\n `);
+  logger.success(`Angular project '${projectName}' created successfully.`);
 }
