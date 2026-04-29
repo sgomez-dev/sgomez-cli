@@ -18,7 +18,7 @@ export async function generateNextJs(options) {
     args.push("--no-tailwind");
   }
 
-  args.push("--eslint", "--app", "--no-src-dir", "--import-alias", "@/*");
+  args.push("--yes", "--eslint", "--app", "--no-src-dir", "--import-alias", "@/*");
 
   const spinner = logger.spinner("Creating Next.js project...");
   await runCommand("npx", args);

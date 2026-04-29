@@ -8,6 +8,7 @@ export async function generateRemix(options) {
   await runCommand("npx", [
     "create-remix@latest",
     projectName,
+    "--yes",
     "--no-install",
     "--no-git-init",
   ]);

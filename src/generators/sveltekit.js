@@ -12,7 +12,7 @@ export async function generateSvelteKit(options) {
     args.push("--no-types");
   }
 
-  args.push("--no-add-ons", "--no-install");
+  args.push("--no-add-ons", "--no-install", "--yes");
 
   const spinner = logger.spinner("Creating SvelteKit project...");
   await runCommand("npx", args);

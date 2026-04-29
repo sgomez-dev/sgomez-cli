@@ -11,6 +11,7 @@ export async function generateAstro(options) {
     "basics",
     "--install",
     "--no-git",
+    "--yes",
   ];
 
   if (language === "TypeScript") {

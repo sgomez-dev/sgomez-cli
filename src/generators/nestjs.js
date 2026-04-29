@@ -12,6 +12,7 @@ export async function generateNestJs(options) {
     "--package-manager",
     "npm",
     "--skip-git",
+    "--strict",
   ]);
   spinner.succeed("NestJS project created");
 
