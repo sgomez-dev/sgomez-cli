@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.1] - 2026-04-29
+
+### Fixed
+
+- **Next.js generator** hanging indefinitely — added `--yes` flag to `create-next-app`
+- **Astro generator** hanging on interactive prompts — added `--yes` flag to `create-astro`
+- **SvelteKit generator** hanging on `sv create` prompts — added `--yes` flag
+- **Remix generator** hanging on template selection — added `--yes` flag to `create-remix`
+- **Nuxt generator** hanging on template/package manager prompts — added `--template minimal --packageManager npm`
+- **NestJS generator** added `--strict` flag for deterministic output
+
 ## [2.0.0] - 2026-04-28
 
 ### Added

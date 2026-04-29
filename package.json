@@ -1,6 +1,6 @@
 {
   "name": "sgomez-cli",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "The ultimate developer toolkit — scaffold projects, add Docker/CI/CD, generate components, and check your system. 14 frameworks supported.",
   "main": "bin/index.js",
   "bin": {
